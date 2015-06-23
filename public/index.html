@@ -28,7 +28,7 @@
 
                 $('.mix').click(function (e) {
                     e.preventDefault();
-                    $.get('/tracks', function (data) {
+                    $.get('http://localhost:9001/tracks', function (data) {
                         tracks = data.tracks;
                         skip();
                     });
