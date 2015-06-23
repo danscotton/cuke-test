@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>cukes test</title>
+
+        <link rel="stylesheet" href="/css/test.css" />
+    </head>
+    <body>
+        <div class="player">
+            <div class="track"><strong>Currently playing </strong><span class="current"></span></div>
+            <button class="skip">Skip</button>
+        </div>
+
+        <div class="mixes">
+            <div class="mix">Mix One</div>
+        </div>
+
+        <script src="/js/jquery-2.1.4.min.js"></script>
+        <script>
+            $(function () {
+                var tracks = [],
+                    current = $('.current');
+
+                function skip () {
+                    current.text((tracks.shift() || {}).name);
+                }
+
+                $('.mix').click(function (e) {
+                    e.preventDefault();
+                    $.get('/tracks', function (data) {
+                        tracks = data.tracks;
+                        skip();
+                    });
+                });
+
+                $('.skip').click(skip);
+            });
+        </script>
+    </body>
+</html>
